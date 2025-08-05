@@ -47,11 +47,23 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
-    implementation(libs.firebase.auth)
-    implementation (platform("com.google.firebase:firebase-bom:32.7.0") )
-    implementation ("com.google.firebase:firebase-auth-ktx")
-    implementation(libs.firebase.firestore)
+    // Firebase BOM (must come before other Firebase libs)
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
 
+    // Firebase Auth + Firestore
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
+
+    // Gson (for JSON parsing, if used)
+    implementation("com.google.code.gson:gson:2.11.0")
+
+    // ViewModel (KTX version)
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+
+    // Glide (for image loading)
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+
+    // Testing libraries
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
