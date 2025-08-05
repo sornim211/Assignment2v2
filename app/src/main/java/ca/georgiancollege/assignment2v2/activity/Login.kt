@@ -3,13 +3,10 @@ package ca.georgiancollege.assignment2v2.activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import ca.georgiancollege.assignment2v2.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
-
+import com.google.firebase.auth.FirebaseUser
 
 class Login : AppCompatActivity() {
 
@@ -18,20 +15,12 @@ class Login : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-
         auth = FirebaseAuth.getInstance()
 
-        // Handle Login
         binding.btnLogin.setOnClickListener {
             val email = binding.editEmail.text.toString().trim()
             val password = binding.editPassword.text.toString().trim()
@@ -44,18 +33,29 @@ class Login : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, MovieListActivity::class.java))
-                    finish()
+                    updateUI(auth.currentUser)
                 }
                 .addOnFailureListener {
                     Toast.makeText(this, "Login Failed: ${it.message}", Toast.LENGTH_LONG).show()
+                    updateUI(null)
                 }
         }
 
-        // Navigate to Register
         binding.registerNow.setOnClickListener {
-            val intent = Intent(this, Register::class.java)
+            startActivity(Intent(this, Register::class.java))
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        updateUI(FirebaseAuth.getInstance().currentUser)
+    }
+
+    private fun updateUI(user: FirebaseUser?) {
+        if (user != null) {
+            val intent = Intent(this, MovieListActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }
