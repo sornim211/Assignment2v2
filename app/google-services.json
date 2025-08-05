@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "619155321238",
+    "project_id": "assignment2v2-e7492",
+    "storage_bucket": "assignment2v2-e7492.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619155321238:android:e0cefe15ea6ea7d0882db7",
+        "android_client_info": {
+          "package_name": "ca.georgiancollege.assignment2v2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkmIQT_0ksMgFG8dsoSTyTuQoT-rOUWNw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

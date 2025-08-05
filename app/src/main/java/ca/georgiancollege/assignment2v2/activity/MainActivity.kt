@@ -1,10 +1,11 @@
-package ca.georgiancollege.assignment2v2
+package ca.georgiancollege.assignment2v2.activity
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import ca.georgiancollege.assignment2v2.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
